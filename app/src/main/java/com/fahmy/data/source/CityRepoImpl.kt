@@ -1,8 +1,10 @@
 package com.fahmy.data.source
 
+import com.fahmy.data.dto.news.ResponseDto
 import com.fahmy.data.network.ApiInterface
 import com.fahmy.data.utils.ResponseState
 import com.fahmy.domain.repo.CityRepo
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class CityRepoImpl @Inject constructor(
@@ -29,6 +31,10 @@ class CityRepoImpl @Inject constructor(
         }
     } catch (e: Exception) {
         ResponseState.Error(e.message)
+    }
+
+    override suspend fun listNewsRx(query: String): Observable<ResponseDto> {
+        return api.searchNewsRx(q = query)
     }
 
 }
